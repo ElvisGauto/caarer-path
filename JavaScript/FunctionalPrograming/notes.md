@@ -84,3 +84,6 @@ Inmutable: Bien!
 
 ### Persistent data structures for efficient inmutability - 16:17
     
+Basicamente hacer uso de la reusabilidad y mergear por asi decirlo aquellas estructuras que son inmutables.
+Esto ayuda al almacenamiento en memoria y achicamos el esfuerzo de trabajo a la hora de aplicar cambios.
+
