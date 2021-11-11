@@ -1,52 +1,47 @@
-import React, { Suspense } from "react";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    NavLink,
-    Redirect
-} from "react-router-dom"; 
-import { routes } from './routes';
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from 'react-router-dom';
 
 import logo from '../logo.svg';
+import { ShoppingPage } from './02-component-patterns/pages/ShoppingPage';
 
+  
 export const Navigation = () => {
-    return (
-      <Suspense fallback={ null }>  
-        <Router>
-          <div className="main-layout">
-            <nav>
-                <img src={ logo } alt="React logo" />
-              <ul>
-                {
-                  routes.map( ({ path, name }) => (
-                    <li key={ path } >
-                      <NavLink
-                          to={ path }
-                          activeClassName="nav-active">
-                          { name }
-                      </NavLink>
-                    </li>
-                  ))
-                }
-              </ul>
-            </nav>
-    
-            <Switch>
-              {
-                routes.map( ({ path, Component }) => (
-                  <Route
-                    key={ path }
-                    path={ path }>
-                    <Component />
-                  </Route>
-                ))
-              }
+  return (
+    <Router>
+      <div className="main-layout">
+        <nav>
+            <img src={ logo } alt="React Logo" />
+          <ul>
+            <li>
+              <NavLink to="/" activeClassName="nav-active" exact>Shopping</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" activeClassName="nav-active" exact>About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/users" activeClassName="nav-active" exact>Users</NavLink>
+            </li>
+          </ul>
+        </nav>
 
-              <Redirect to={ routes[0].path } />
-            </Switch>
-          </div>
-        </Router>
-      </Suspense>
-    );
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <h1>About</h1>
+          </Route>
+          <Route path="/users">
+            <h1>Users</h1>
+          </Route>
+          <Route path="/">
+            <ShoppingPage />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
